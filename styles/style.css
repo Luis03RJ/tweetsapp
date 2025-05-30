@@ -1,9 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Quicksand:wght@300..700&display=swap');
 
-/*──────────────────────────────────────────────────────
-  VARIABLES GLOBALES
-──────────────────────────────────────────────────────*/
 :root {
+
   --bg-gradient: linear-gradient(135deg, #2d1a22, #5d4037);
   --bg-page: #1a1414;
   --bg-navbar: rgba(41, 30, 30, 0.85);
@@ -18,83 +16,341 @@
   --max-width: 1200px;
   --font-main: 'Quicksand';
 }
+  
+  /*──────────────────────────────────────────────────────
+    RESET & GLOBAL
+  ──────────────────────────────────────────────────────*/
+  * {
+    margin: 0; padding: 0;
+    box-sizing: border-box;
+    transition: all var(--transition);
+  }
+  html, body {
+    height: 100%;
+    font-family: var(--font-main);
+    background: var(--bg-page);
+    color: var(--text-primary);
+    overflow-x: hidden;
+  }
+  .container {
+    width: 90%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+  
+  /*──────────────────────────────────────────────────────
+    NAVBAR
+  ──────────────────────────────────────────────────────*/
+  .navbar {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background: var(--bg-navbar);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+    padding: 1rem 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  }
+  .navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .nav-logo {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--accent);
+    text-decoration: none;
+    animation: fadeInDown 0.6s;
+  }
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+  }
+  .nav-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+    padding: 0.25rem;
+  }
+  .nav-links a.active,
+  .nav-links a:hover {
+    color: var(--text-primary);
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+    left: 0; bottom: -4px;
+    transition: width 0.3s;
+  }
+  .nav-links a:hover::after,
+  .nav-links a.active::after {
+    width: 100%;
+  }
+  
+  /*──────────────────────────────────────────────────────
+    CABECERA
+  ──────────────────────────────────────────────────────*/
+  .page-header {
+    text-align: center;
+    padding: 4rem 0 2rem;
+    animation: fadeIn 0.6s ease both;
+  }
+  .page-header h1 {
+    font-size: 2.8rem;
+    margin-bottom: 0.5rem;
+  }
+  .page-header p {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+  }
+  
+  /*──────────────────────────────────────────────────────
+    SECCIÓN DE CREAR TWIST
+  ──────────────────────────────────────────────────────*/
+  .new-twist-section {
+    background: var(--bg-card);
+    padding: 2rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 2rem;
+    animation: slideUp 0.6s ease both;
+  }
+  .new-twist-section h2 {
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+  #newTwistForm textarea {
+    width: 100%;
+    background: #333138;
+    border: 1px solid #333;
+    border-radius: var(--radius);
+    padding: 1rem;
+    resize: none;
+    color: var(--text-primary);
+    font-size: 1rem;
+  }
+  #newTwistForm textarea:focus {
+    outline: none;
+    border-color: var(--accent-alt);
+    box-shadow: 0 0 8px rgba(0, 212, 255, 0.6);
+  }
+  .twist-form-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.5rem;
+  }
+  #charCounter {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+  }
+  .btn {
+    padding: 0.65rem 1.4rem;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    transition: transform var(--transition);
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+  }
+  .btn-primary:hover {
+    background: var(--btn-hover);
+    transform: translateY(-3px);
+  }
+  
+  /*──────────────────────────────────────────────────────
+    FEED DE TWISTS
+  ──────────────────────────────────────────────────────*/
+  .twists-feed h2 {
+    margin-bottom: 1rem;
+    color: var(--accent);
+  }
+  #twistsContainer {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  /* Cada twist: asume que tu JS añade clase .twist-card */
+  .twist-card {
+    background: var(--bg-card);
+    padding: 1.25rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    animation: fadeIn 0.6s ease both;
+  }
+  .twist-card h3 {
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+  }
+  .twist-card p {
+    line-height: 1.5;
+  }
 
-/*──────────────────────────────────────────────────────
-  RESET & GLOBAL
-──────────────────────────────────────────────────────*/
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  transition: all var(--transition);
-}
-html, body {
-  height: 100%;
-  font-family: var(--font-main);
-  background: var(--bg-gradient);
-  color: var(--text-primary);
-  overflow-x: hidden;
-}
-.container {
-  width: 90%;
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 1rem;
-}
-
-/*──────────────────────────────────────────────────────
-  NAVBAR
-──────────────────────────────────────────────────────*/
-.navbar {
-  position: sticky;
-  top: 0;
+  .twist-avatar {
+    /* Tamaño fijo y forma circular */
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    
+    /* Degradado vibrante */
+    background: linear-gradient(135deg, var(--accent), var(--accent-alt));
+    
+    /* Centrado del texto */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    /* Fuente y color */
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffffff;
+    
+    /* Separación del contenido */
+    margin-right: 0.75rem;
+    flex-shrink: 0;
+    
+    /* Sombra suave para resaltar */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+    
+    /* Animación de aparición */
+    animation: fadeIn 0.4s ease both;
+  }
+  
+/* ──────────────────────────────────────────────────────
+   ESTILOS PARA EL FORMULARIO DE RESPUESTA
+────────────────────────────────────────────────────── */
+.reply-form-container {
+  margin-top: 1rem;
   width: 100%;
-  background: var(--bg-navbar);
-  backdrop-filter: blur(8px);
-  z-index: 1000;
-  padding: 1rem 0;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.5);
 }
-.navbar .container {
+
+.reply-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background: var(--bg-card);
+  padding: 1rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  animation: fadeIn 0.4s ease both;
+}
+
+.reply-form textarea {
+  width: 100%;
+  background: #333138;
+  border: 1px solid #333;
+  border-radius: var(--radius);
+  padding: 0.75rem;
+  resize: none;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+}
+
+.reply-form textarea:focus {
+  border-color: var(--accent-alt);
+  box-shadow: 0 0 6px rgba(0,212,255,0.5);
+  outline: none;
+}
+
+.reply-form .twist-form-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-.nav-logo {
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: var(--accent);
-  text-decoration: none;
-  animation: fadeInDown 0.6s;
-}
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 1.5rem;
-}
-.nav-links a {
-  color: var(--text-secondary);
-  text-decoration: none;
-  font-weight: 500;
-  position: relative;
-  padding: 0.25rem;
-}
-.nav-links a.active,
-.nav-links a:hover {
-  color: var(--text-primary);
-}
-.nav-links a::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  background: var(--accent);
-  left: 0;
-  bottom: -4px;
-  transition: width 0.3s;
-}
-.nav-links a:hover::after,
-.nav-links a.active::after {
-  width: 100%;
+  margin-top: 0.25rem;
 }
 
+.reply-form .char-counter-reply {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.reply-form .btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  border-radius: var(--radius);
+  background: var(--accent);
+  color: #fff;
+  align-self: flex-end;
+  transition: background var(--transition), transform var(--transition);
+}
+
+.reply-form .btn-sm:hover {
+  background: var(--btn-hover);
+  transform: translateY(-2px);
+}
+
+/* ──────────────────────────────────────────────────────
+   INDENTACIÓN Y ESTILO DE LOS THREADS
+────────────────────────────────────────────────────── */
+.thread-container {
+  margin-top: 1rem;
+  padding-left: 1.5rem;
+  border-left: 2px solid rgba(255,255,255,0.1);
+}
+
+.reply-card {
+  margin-top: 1rem;
+}
+
+/* Asegúrate de que tu createTwistElement añada la clase .reply-card
+   al article cuando isReply sea true: <article class="twist-card reply-card"> */
+
+
+  /*──────────────────────────────────────────────────────
+    FOOTER
+  ──────────────────────────────────────────────────────*/
+  .site-footer {
+    background: var(--bg-navbar);
+    padding: 1.5rem 0;
+    text-align: center;
+    margin-top: 3rem;
+  }
+  .site-footer p {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+  }
+  
+  /*──────────────────────────────────────────────────────
+    ANIMACIONES
+  ──────────────────────────────────────────────────────*/
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  
+  /*──────────────────────────────────────────────────────
+    RESPONSIVE
+  ──────────────────────────────────────────────────────*/
+  @media (min-width: 768px) {
+    #twistsContainer {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 600px) {
+    .nav-links {
+      display: none;
+    }
+    .navbar .container {
+      justify-content: space-between;
+    }
+  }
+  
